@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Disable user right select */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* sign up and login button */
+.sign-up-btn {
+    color: white;
+    background: red;
+    border: 2px solid white;
+    padding: 0 8px 0 8px;
+    font-weight: bold;
+}
+
+.sign-up-btn a:hover {
+    font-weight: 400;
+}
+
+.log-in-btn {
+    background: white;
+    border: 2px solid green;
+    padding: 0 8px 0 8px;
+    margin-right: .5rem;
+    color: black;
+    font-weight: bold;
+    
+}
+
+.log-in-btn a:hover {
+    font-weight: 400;
+}
+
+/* Footer section  */
+footer {
+    clear: both;
+    height: 80px;
+    width: 100%;
+    border-top: 2px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+footer .copyright {
+    float: left;
+    color: white    ;
+}
+
+footer .terms {
+    float: right;
+}
+
+footer .terms a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Header Text */
+section.header-section {
+    position: relative;
+}
+div.header-text {
+    position: absolute;
+    top: 55%;
+    margin-left: 20px;
+}
+
+div.header-text h1, p {
+    color: black;
+}
+
+div.header-text h1 {
+    font-size: 5rem;
+}
+
+/* Welcome section */
+section.welcome welcome-text {
+    font-size: 1.25rem;
+}
+
+/* Student Review Section Gallery Button */
+a.carousel-control-prev, a.carousel-control-next {
+    top: 30%;
+    width: 4rem;
+    height: 4rem;
+    background: #ccc;
+    border-radius: 5rem;
+    border: 1px solid #000;
+}
+
+@media (max-width: 700px){
+
+    div.header-text {
+        position: absolute;
+        top: 30%;
+        margin-left: 20px;
+    }
+
+    div.header-text h1 {
+        font-size: 2rem;
+    }
+
+    div.header-text p {
+        font-size: 1rem;
+    }
+
+}
+
+@media (max-width: 700px){
+    footer p {
+        font-size: .70rem;
+    }
+}
+
+@media (max-width: 380px){
+    div.header-text {
+        position: absolute;
+        top: 25%;
+        margin-left: 20px;
+    }
+
+    div.header-text h1 {
+        font-size: 1.25rem;
+    }
+
+    div.header-text p {
+        font-size: .60rem;
+    }
+
+    footer p {
+        font-size: .60rem;
+    }
+}
+
+/* Video Section */
+section.video {
+    /* border: 1px solid white; */
+    width: 100%;
+    /* height: 500px; */
+    margin-bottom: 20px;
+}
+
+.yt-cover {
+    position: absolute;
+    top: 0;
+    bottom:0;
+    right:0;
+    left:0;
+    z-index:1000;
+}
+
+/* Comment Section */
+section.comments {
+    border-top: 1px solid white;
+    width: 100%;
+    /* height: auto; */
+    padding: 1rem;
+}
+
+/* Delete Button on Cart Page */
+.delete {
+    cursor: pointer;
+}
+
+.make-white {
+    color: white;
+}
+
+.make-white ol {
+    margin-left: 2rem;
+}
