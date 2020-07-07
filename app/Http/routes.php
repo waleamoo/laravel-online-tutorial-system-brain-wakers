@@ -46,7 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     ]);
 
     // post search route
-    Route::post('/search', [
+    Route::post('/user/search', [
         'uses' => 'HomeController@getSearchCourse',
         'as' => 'course.search'
     ]);

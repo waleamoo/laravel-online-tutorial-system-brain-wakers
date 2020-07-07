@@ -38,8 +38,6 @@ Brain Wakers | Course Details
                                 Class tutored by: <span style="font-weight: bold;">{{$course->tutor}}</span>
                                 <br><br>
                             </div>
-                            <a href="{{ route('addCourse', ['id' => $course->id] )}}" class="btn btn-success">Add To
-                                Cart</a>
 
                             <a href="{{ route('getCourse', ['id' => $course->id] )}}" class="btn btn-info">View Course Details</a>
                         </div>

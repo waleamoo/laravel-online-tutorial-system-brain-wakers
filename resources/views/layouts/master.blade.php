@@ -85,7 +85,7 @@
                 </li>
                 @endif
 
-                <form class="form-inline my-2 my-lg-0" action="{{ route('course.search') }}" method="POST">
+                <form class="form-inline my-2 my-lg-0" action="{{ url('/user/search') }}" method="POST">
                     <input class="typeahead form-control mr-sm-2" type="search" name="search" id="search" aria-label="Search" placeholder="Search any subject">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     {{ csrf_field() }}
