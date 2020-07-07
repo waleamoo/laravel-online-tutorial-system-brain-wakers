@@ -120,9 +120,9 @@
                         Hello {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">User Profile</a>
-                        <a class="dropdown-item" href="#">My Courses</a>
-                        <a class="dropdown-item" href="#">Cart</a>
+                        <!--<a class="dropdown-item" href="#">User Profile</a>-->
+                    <a class="dropdown-item" href="{{ route('user.course')}}">My Courses</a>
+                        <a class="dropdown-item" href="{{ route('user.cart')}}">Cart</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
                     </ul>
@@ -167,6 +167,8 @@
             }
         });
     </script>
+
+    <script src="{{ URL::to('js/main.js')}}" ></script>
 </body>
 </html>
 

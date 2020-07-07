@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Comment;
 use App\Course;
+use App\Enrollment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Order;
 use App\User;
 use App\Subject;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use \Validator;
 
 class HomeController extends Controller
 {
@@ -43,11 +48,22 @@ class HomeController extends Controller
     }
 
     public function getCourses(){
-        return view('user.course');
+        // fetch the user courses or enrollment 
+        //$courses = DB::table('enrollments')->where('user_id', Auth::id())->value('course_id');
+        $courses = DB::table('subjects')
+        ->join('courses', 'courses.subject_id', '=', 'subjects.id')
+        ->join('enrollments', 'enrollments.course_id', '=', 'courses.id')
+        ->where('user_id', Auth::id())->get();
+
+        return view('user.course', ['courses' => $courses]);
     }
 
-    public function getClassRoom(){
-        return view('user.classroom');
+    public function getClassRoom($id){
+        // pass the comments 
+        $comments = Comment::where('lecture_id', $id)->get(); // find the lecture id comment 
+        return view('user.classroom', [
+            'comments' => $comments, 'lecture_id' => $id
+        ]);
     }
     
     public function getCart(){
@@ -116,18 +132,113 @@ class HomeController extends Controller
 
     public function getCheckout(){
         if(!Session::has('cart')){
-            return view('user.index');
+            return view('user.index')->with('error', 'Please login or register');
         }
 
-        // create a new order 
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
 
-        // charge the user 
+        // validate if the user has the course already 
+
+        // charge the user // get the order as an hidden input field
+
+        // create a new order 
+        $order = new Order();
+        //$order->user_id = Auth::id();
+        $order->cart = serialize($cart);
+        $order->payment_id = strval(time());
+        $order->totalPrice = $cart->totalPrice;
+        Auth::user()->orders()->save($order);
 
         // email the user 
+        $orders = Auth::user()->orders->sortByDesc('id')->take(1);
+        $orders->transform(function ($order, $key){
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+
+        // save them an errollment
+        foreach($orders as $nOrder){
+            foreach($nOrder->cart->items as $item){
+                $enrollment = new Enrollment([
+                    'course_id' => $item['item']['id'],
+                    'user_id' => Auth::id(),
+                    'progress' => '0%'
+                ]);
+                $enrollment->save();
+            }
+        }
+
+        // email the user 
+        $data = array('orders' => $orders, 'name' => Auth::user()->name, 
+        'body' => 'Thanks for studying with Brain Wakers. We hope this will be a worthwhile and rewarding journey for you.');
+        Mail::send('email.register', $data, function ($message) {
+            $message->from('john@johndoe.com', 'John Doe');
+            $message->sender('john@johndoe.com', 'John Doe');
+            $message->to(Auth::user()->email, Auth::user()->name);
+            $message->cc('admin@brainwakers.com', 'Admin');
+            //$message->bcc('john@johndoe.com', 'John Doe');
+            //$message->replyTo('john@johndoe.com', 'John Doe');
+            $message->subject('Congrats ' . Auth::user()->name);
+            //$message->priority(3);
+            //$message->attach('pathToFile');
+        });
 
         // forget the session 
+        Session::forget('cart');
+        
+        $courses = DB::table('subjects')
+        ->join('courses', 'courses.subject_id', '=', 'subjects.id')
+        ->join('enrollments', 'enrollments.course_id', '=', 'courses.id')
+        ->where('user_id', Auth::id())->get();
+        return redirect()->route('user.course', ['courses' => $courses])->with('success', 'Welcome aboard');
 
+    }
 
+    // comment section 
+    public function postComment(Request $request){
+        // validate the request 
+        $validation = Validator::make($request->all(), [
+            'comment' => 'required',
+            'select_file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        // error array and sucess message 
+        if($validation->passes()){
+            if($request->hasFile('select_file')){
+                $fileNameWithExt = $request->file('select_file')->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('select_file')->getClientOriginalExtension();
+                $fileNameToStore = $fileName . '-' . time() . '.' . $extension;
+                $request->file('select_file')->move('images', $fileNameToStore);
+            }else{
+                $fileNameToStore = '';
+            }
+            $comment = new Comment([
+                'comment_body' => $request->get('comment'),
+                'comment_image' => $fileNameToStore,
+                'lecture_id' => $request->get('lecture_id'),
+                'user_id' => Auth::id()
+            ]);
+            $comment->save();
+
+            return back()->with('success', 'Comment inserted');
+        }else{
+            return back()->withErrors($validation);
+            
+        }
+    }
+
+    public function fetchComment(Request $request){
+        if(!empty($request->get('searchComment'))){
+            $search = $request->get('searchComment');
+            $comments = Comment::where("comment_body", "like",  "%$search%")
+            ->orderBy('id', 'desc')
+            ->get();
+            return view('user.classroom', ['comments' => $comments]);
+        }else{
+            $comments = Comment::orderBy('id', 'desc')->get();            
+            return view('user.classroom', ['comments' => $comments]);
+        }
     }
 
 

@@ -6,6 +6,7 @@ Brain Wakers | Home
 
 @section('content')
 <div class="container">
+  @include('include.message')
   <section class="header-section">
     <img class="img-responsive img-thumbnail" src="{{ URL::to('images/e-learn.jpg') }}" alt="e-learning" width="100%">
 

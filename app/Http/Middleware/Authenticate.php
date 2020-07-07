@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Authenticate
 {
@@ -21,7 +22,8 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                Session::put('oldUrl', $request->url()); // check for login user to that want to go back to checkout
+                return redirect()->route('user.login')->with('error', 'Please login or register');
             }
         }
 

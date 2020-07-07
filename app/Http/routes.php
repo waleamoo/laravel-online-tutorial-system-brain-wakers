@@ -1,9 +1,17 @@
 <?php
 
-//use Illuminate\Routing\Route;
-
-
 Route::group(['middleware' => 'web'], function () {
+    // comment route
+    Route::post('/user/comment', [
+        'uses' => 'HomeController@postComment',
+        'as' => 'user.comment'
+    ]);
+
+    Route::post('/user/comment/fetch', [
+        'uses' => 'HomeController@fetchComment',
+        'as' => 'user.fetchComment'
+    ]);
+
     // route for email verification 
     Route::get('/user/activation/{token}', [
         'uses' => 'Auth\RegisterController@userActivation',
@@ -70,12 +78,14 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::get('/courses', [
         'uses' => 'HomeController@getCourses',
-        'as' => 'user.course'
+        'as' => 'user.course',
+        'middleware' => 'auth'
     ]);
     
-    Route::get('/classroom', [
+    Route::get('/classroom/{id}', [
         'uses' => 'HomeController@getClassRoom',
-        'as' => 'user.classroom'
+        'as' => 'user.classroom',
+        'middleware' => 'auth'
     ]);
 
     Route::get('/cart', [
@@ -85,7 +95,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/user/logout', [
         'uses' => 'HomeController@getLogout',
-        'as' => 'user.logout'
+        'as' => 'user.logout',
+        'middleware' => 'auth'
     ]);
 
     Route::get('/course/{id}', [
@@ -111,13 +122,8 @@ Route::group(['middleware' => 'web'], function () {
         ]);
     });
 
-    //Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');
-
 });
 
 
 Route::auth();
 
-
-
-//Route::get('/home', 'HomeController@index');
