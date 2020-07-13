@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ URL::to('css/bootnavbar.css')}}">
     <link rel="stylesheet" href="{{ URL::to('css/custom.css')}}">
     <link rel="stylesheet" href="{{ URL::to('css/font-awesome.min.css')}}">
+    <link rel="shortcut icon" href="{{ URL::to('images/logo.png') }}" type="image/x-icon">
     <title>@yield('title')</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -16,7 +17,7 @@
 
 <body oncontextmenu="return false;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main_navbar">
-        <a class="navbar-brand" href="/">Brain Wakers</a>
+    <a class="navbar-brand" href="/"><img src="{{ URL::to('images/logo.png') }}" alt="Brain Wakers Logo" title="Brain Wakers" height="40" class="img-responsive"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,15 +30,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>-->
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-
 
                 <li class="nav-item dropdown active mr-2">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -56,7 +48,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                 <?php $courses = \App\Course::where('subject_id', $subject->id)->get(); ?>
                                 @foreach ($courses as $crs)
-                                <li><a class="dropdown-item" href="{{ route('getCourse', ['cid' => $crs->id]) }}">{{ $crs->course_name }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('getCourse', ['sub_id' => $subject->id, 'cid' => $crs->id]) }}">{{ $crs->course_name }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
@@ -77,6 +69,14 @@
 
 
                     </ul>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('user.services') }}">Services</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('user.contact') }}">Contact</a>
                 </li>
 
                 @if(Auth::check())
@@ -169,6 +169,7 @@
     </script>
 
     <script src="{{ URL::to('js/main.js')}}" ></script>
+    
 </body>
 </html>
 

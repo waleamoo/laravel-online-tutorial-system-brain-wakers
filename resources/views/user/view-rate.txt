@@ -1,0 +1,117 @@
+!-- 
+
+    @foreach ($supplement_ratings as $rating)
+                <div class="card card-body bg-light">
+                    <input type="hidden" name="rating-number" id="rating-number" value="{{ $rating->rating }}">
+                    <p><b>{{ App\User::where('id', $rating->user_id)->value('last_name')}}</b></p>
+                    <p>{{ $rating->msg }}</p>
+
+                    @if ($rating->rating > 0)
+                        <!-- Rating Stars Box -->
+                        <div class='rating-stars-show'>
+                            <ul id='stars-show'>
+                                <li class='star-show' title='Poor' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-show' title='Fair' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-show' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-show' title='Excellent' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-show' title='WOW!!!' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+
+                </div>
+                @endforeach
+
+-->
+
+
+
+
+<!--------- Side bar Accordion -->
+<div id="accordion">
+        <div class="card border-info  mb-2">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                Collapsible Group Item #1
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card border-info  mb-2">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                Collapsible Group Item #2
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card border-info mb-2">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                aria-expanded="false" aria-controls="collapseThree">
+                Collapsible Group Item #3
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--<div class="yt-cover"></div>-->
+          <iframe width="750" height="470" src="https://www.youtube.com/embed/SFhbnx4qovw?autoplay=1"
+            frameborder="3"></iframe>
+          <!-- <iframe id="ytplayer" type="text/html" width="640" height="360"
+  src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+  frameborder="0"></iframe> -->
+
+  INDICES
+  https://youtu.be/vNtN50dSXgQ
+
+  LOG
+  https://youtu.be/Qix3JqTQNTM
+
+  <iframe src="https://drive.google.com/file/d/0B5QK-dNui03nWTBFZi1XdHJDaWc/preview" width="750" height="480"></iframe>

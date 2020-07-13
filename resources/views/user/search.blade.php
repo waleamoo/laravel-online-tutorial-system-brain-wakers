@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Brain Wakers | Course Details
+Brain Wakers | Search Result
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@ Brain Wakers | Course Details
 
         @if (count($courses) > 0)
         <div class="col-md-12">
-            <h3>Course Details</h3>
+            <h3>Course Search</h3>
         </div>
         @foreach ($courses as $course)
         <div class="row">
@@ -39,7 +39,7 @@ Brain Wakers | Course Details
                                 <br><br>
                             </div>
 
-                            <a href="{{ route('getCourse', ['id' => $course->id] )}}" class="btn btn-info">View Course Details</a>
+                            <a href="{{ route('getCourse', ['sub_id' => $course->subject_id, 'id' => $course->id] )}}" class="btn btn-info">View Course Details</a>
                         </div>
                     </div>
                 </div>

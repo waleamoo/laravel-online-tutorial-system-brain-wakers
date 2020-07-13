@@ -41,7 +41,7 @@ Brain Wakers | Login
                           </button>
                     </div>
                 @endif
-
+                
                 <form action="#" method="POST">
                     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                         <label class="col-form-label" for="password">E-Mail Address</label>
@@ -74,7 +74,10 @@ Brain Wakers | Login
                     
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-btn fa-user"></i> Log In</button>
-                <p><a href="{{ url('password/reset') }}">Forgot Password? Cick here</a></p>
+                <p><a href="{{ url('user/register') }}">Not yet a member? Register here</a> <br>
+                <a href="{{ url('password/reset') }}">Forgot Password? Cick here</a> <br>
+                <a href="{{ url('user/active') }}">Resend registeration activation code</a>
+            </p>
 
                     
                 </form>

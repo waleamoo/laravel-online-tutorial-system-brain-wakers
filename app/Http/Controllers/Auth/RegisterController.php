@@ -111,7 +111,7 @@ class RegisterController extends Controller
             $user = $this->create($input)->toArray();
             $user['link'] = str_random(30);
             DB::table('users_activations')->insert(['id_user' => $user['id'], 'token' => $user['link']]);
-
+            //dd($user);
             Mail::send('email.activation', $user, function ($message) use ($user) {
                 $message->from('admin@brainwakers.com', 'Admin');
                 $message->sender('john@johndoe.com', 'John Doe');
@@ -143,6 +143,42 @@ class RegisterController extends Controller
         }
 
         return redirect()->route('user.login')->with('warning', 'Your token is invalid');
+    }
+
+    // codes for resend activattion code
+
+    public function getResendForm(){
+        return view('user.active');
+    }
+
+    public function postResendForm(Request $request){
+        $this->validate($request, [
+            'email' => 'required|email|max:255'
+        ]);
+
+        $check = DB::table('users')->where('email', $request->get('email'))->first();
+        if(!is_null($check)){
+            $user = DB::table('users')
+            ->join('users_activations', 'users_activations.id_user', '=', 'users.id')
+            ->where('users.id', $check->id)->get();
+            
+            if($user[0]->is_activated == 0){
+                $data = array('email' => $user[0]->email, 'name' => $user[0]->name, 'token' => $user[0]->token);
+                Mail::send('email.resend', $data, function ($message) use ($data) {
+                    $message->from('admin@brainwakers.com', 'Admin');
+                    $message->sender('admin@brainwakers.com', 'Admin');
+                    $message->to($data['email'], $data['name']);
+                    $message->subject('Brain Wakers - Activation Code');
+                });
+
+                return redirect()->route('getActive')->with('success', 'Activation link has been resent to ' . $request->get('email'));
+            }
+
+            return redirect()->route('user.login')->with('success', 'Your email has already been activated. Instead use the password reset link to reset your password.');
+            //return redirect()->route('getActive')->with('success', 'We have it');
+        }else{
+            return redirect()->route('getActive')->with('error', 'Your email ' . $request->get('email') . ' does not match any of our records');
+        }
     }
 
 

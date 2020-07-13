@@ -24,19 +24,37 @@ Brain Wakers | Cart
 
                     @foreach ($courses as $product)
                     <div class="row">
-                        <div class="col">{{ $product['item']['course_name']}} {{ \App\Subject::find($product['item']['id'])->value('subject_name') }} Course</div>
+                        <div class="col">{{ $product['item']['course_name']}} {{ \App\Subject::find($product['item']['subject_id'])->value('subject_name') }}  Course</div>
                             <div class="col">₦{{ $product['price'] }}.00</div>
                             <div class="col"><a href="{{ route('getRemoveCourse', ['id' => $product['item']['id']]) }}"><i class="fa fas fa-trash delete fa-2x" title="Remove Course"></i></a></div>
                         </div>
                     @endforeach
-                    
+                    <br><br>
 
                     <div class="card-footer">
                         <div class="row" style="float:right; padding: 10px;">
                             <span class="text-white" style="font-size: 1rem;">Total: ₦{{ $totalPrice }}.00</span>
                         </div>
                         <div class="row" style="float:right; clear:right; padding: 10px;">
-                            <a href="{{ route('getCheckout')}}" class="btn btn-success btn-sm">Checkout Cart</a>
+                            <script src="//voguepay.com/js/voguepay.js"></script> 
+                            <form action="https://voguepay.com/pay/" method="POST">
+                                
+                                <input name="v_merchant_id" type="hidden" value="demo" />
+                                <input name="memo" type="hidden" value="Brain Wakers Tutorial" />
+                                <input name="success_url" type="hidden" value="{{ url('/f&bm&jgf&hjfhh&hfhghtzfgturfeuwh&vfdbssguiuewfhdje&rbnvihrslcnuiwbuvrcbicrkuhvtrikujesbxxusx') }}" />
+                                <input name="fail_url" type="hidden" value="{{ url('/') }}" />
+                                <input src="https://voguepay.com/images/buttons/checkout_green.png" type="image" />
+                                <input name="merchant_ref" type="hidden" value="Tutorial Payment" />
+                                <input name="developer_code" type="hidden" value="5e15148f0446e" />
+                                <input name="store_id" type="hidden" value="4895" />
+                                <input name="cur" type="hidden" value="NGN" />
+                                <input name="item_1" type="hidden" value="Brain Wakers Tutorial" />
+                                <input name="price_1" type="hidden" value="{{ $totalPrice }}" />
+                                <input name="description_1" type="hidden" value="Brain Wakers Tutorial Payment" />
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                            </form>
+
                         </div>
                     </div>
                 </div>

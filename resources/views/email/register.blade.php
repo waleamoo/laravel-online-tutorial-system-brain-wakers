@@ -4,7 +4,7 @@
 @foreach ($orders as $order)
     @foreach($order->cart->items as $item)
     <p>
-        {{ $item['item']['course_name'] }} <?php echo \App\Subject::where('id', $item['item']['id'] )->value('subject_name'); ?>
+        {{ $item['item']['course_name'] }} <?php echo \App\Subject::where('id', $item['item']['subject_id'] )->value('subject_name'); ?>
          Course  at <span class="badge badge-danger"> ₦{{ $item['price'] }}.00</span>
     </p>
     @endforeach

@@ -18,7 +18,7 @@ class CreateLecturesTable extends Migration
             $table->integer('course_id');
             $table->string('topic');
             $table->string('sub_topic');
-            $table->string('video');
+            $table->text('video');
             $table->timestamps();
         });
     }

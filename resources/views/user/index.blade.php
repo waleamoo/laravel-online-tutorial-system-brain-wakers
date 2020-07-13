@@ -5,7 +5,7 @@ Brain Wakers | Home
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container my-4">
   @include('include.message')
   <section class="header-section">
     <img class="img-responsive img-thumbnail" src="{{ URL::to('images/e-learn.jpg') }}" alt="e-learning" width="100%">
@@ -31,15 +31,13 @@ Brain Wakers | Home
   <hr>
   <section class="welcome">
     <div class="container">
-      <p class="text-white-50 welcome-text">
-        <span style="font-size: 200%; color: red;">B</span>rain wakers, a subsidiary of Well-Informed Technologies is
-        the
-        provider of quality home school services in West Africa. We use the best technologies and instructional
-        materials
-        to provide learning almost better than it is offered in schools. Our goal is to give everyone a chance at
-        education
-        irrespective of your distance, daily work schedule, or work routine using the best means of coverage, the
-        internet.
+      <p class="text-white lead welcome-text">
+        <span style="font-size: 200%; color: red;">B</span>rain wakers, a subsidiary 
+        of Well-Informed Technologies is the
+        provider of quality online home learning. We use the best technologies and instructional
+        materials to provide learning almost better than it is offered in schools. Our goal is to 
+        give everyone a chance at education irrespective of your distance, daily work schedule, or 
+        work routine using the best means of coverage, the Internet.
       </p>
     </div>
   </section>
@@ -52,7 +50,7 @@ Brain Wakers | Home
           <div class="card border-info mb-3">
             <div class="card-body">
               <h5 class="card-title text-capitalize">Own your class room</h5>
-              <p class="card-text text-white">Some quick exke up the bulk of the card's content.</p>
+              <p class="card-text text-white">Ask questions freely and get answers.</p>
             </div>
           </div>
         </div>
@@ -61,7 +59,7 @@ Brain Wakers | Home
           <div class="card border-info mb-3">
             <div class="card-body">
               <h5 class="card-title text-capitalize">Be In Control</h5>
-              <p class="card-text text-white">Some quick exke up the bulk of the card's content.</p>
+              <p class="card-text text-white">Learc at your own pace anytime.</p>
             </div>
           </div>
         </div>
@@ -70,7 +68,7 @@ Brain Wakers | Home
           <div class="card border-info mb-3">
             <div class="card-body">
               <h5 class="card-title text-capitalize">Learn anytime, anywhere</h5>
-              <p class="card-text text-white">Some quick exke up the bulk of the card's content.</p>
+              <p class="card-text text-white">Connect with your teacher anytime and anywhere.</p>
             </div>
           </div>
         </div>
@@ -79,13 +77,13 @@ Brain Wakers | Home
     </div>
   </section>
 
+  <!--
   <section class="reviews">
     <div class="container">
       <h2>What our students are saying</h2>
       <hr>
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <!-- slider 1 -->
           <div class="carousel-item active">
             <div class="row">
 
@@ -123,8 +121,8 @@ Brain Wakers | Home
               </div>
             </div>
           </div>
-          <!-- end of slider 1-->
-          <!-- slider 2-->
+          
+          
           <div class="carousel-item">
             <div class="row">
 
@@ -162,9 +160,7 @@ Brain Wakers | Home
               </div>
             </div>
           </div>
-          <!-- end of slider 2-->
-
-          <!-- slider 3-->
+          
           <div class="carousel-item">
             <div class="row">
 
@@ -202,7 +198,7 @@ Brain Wakers | Home
               </div>
             </div>
           </div>
-          <!-- end of slider 3-->
+          
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"
@@ -217,42 +213,8 @@ Brain Wakers | Home
 
     </div>
 
-  </section>
+  </section> -->
+
 </div>
 
-<!-- 
-
-  <div class="row">
-
-                    <div class="col-md-4">
-                      <div class="card border-info mb-3 bg-white">
-                          <div class="card-body">
-                            <img src="{{ URL::to('images/unknown.png') }}" alt="Student" class="img-responsive w-25 align-content-md-start">
-                            <h5 class="card-title text-capitalize text-dark-50">John Doe</h5>
-                            <p class="card-text text-dark-50">Some quick exke up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="card border-info mb-3 bg-white">
-                        <div class="card-body">
-                          <img src="{{ URL::to('images/unknown.png') }}" alt="Student" class="img-responsive w-25 align-content-md-start">
-                          <h5 class="card-title text-capitalize text-dark-50">John Doe</h5>
-                          <p class="card-text text-dark-50">Some quick exke up the bulk of the card's content.</p>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="card border-info mb-3 bg-white">
-                      <div class="card-body">
-                        <img src="{{ URL::to('images/unknown.png') }}" alt="Student" class="img-responsive w-25 align-content-md-start">
-                        <h5 class="card-title text-capitalize text-dark-50">John Doe</h5>
-                        <p class="card-text text-dark-50">Some quick exke up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-              </div>
-                  </div>
--->
 @endsection
